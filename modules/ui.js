@@ -7,7 +7,7 @@ let displayProduct = (p) => {
 
     productElement.innerHTML = `
     <div class="photo">
-        picto
+        <img src="${p.photo}" alt="${p.ref}" style="max-width: 100%; max-height: 100%;">
         <a class="product-add2cart">
             <span class="mdi mdi-cart"></span>
         </a>
@@ -23,12 +23,22 @@ let displayProduct = (p) => {
     </div>
     `;
 
+
+    // version original:
+    /*
     productElement.querySelector('.product-add2cart').addEventListener('click', () => {
         cart.Cart.addToCart(p);
         displayCart();
     });
+    */
 
-    // Ajout du produit au DOM
+    // Nouvelle version (exo10):
+    productElement.querySelector('.product-add2cart').addEventListener('click', () => {
+        if (typeof window.addToCartCallback === 'function') {
+            window.addToCartCallback(p);
+        }
+    });
+
     document.getElementById("product-list").appendChild(productElement);
 };
 
@@ -71,11 +81,10 @@ let displayCart = () => {
         </tbody>
     `;
 
-    // Calcul du total avec genericCalc
+
     let total = cart.Cart.genericCalc((acc, item) => acc + item.product.price * item.qty);
     document.getElementById("cart-total").innerHTML = `${total} €`;
 
-    // Affichage du nombre total de produits
     let nbProducts = cart.Cart.genericCalc((acc, item) => acc + item.qty);
     document.getElementById("total-products").innerHTML = `${nbProducts}`;
 };
@@ -83,5 +92,5 @@ let displayCart = () => {
 export default {
     buildProductsList: buildProductsList,
     displayCart: displayCart,
-    displayProduct:displayProduct,
+    displayProduct: displayProduct,
 };

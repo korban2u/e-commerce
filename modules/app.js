@@ -16,6 +16,14 @@ function init(){
         displayProduct.displayCart();
     });
 
+
+    window.addToCartCallback = function(product) {
+        cart.Cart.addToCart(product);
+        displayProduct.displayCart();
+    };
+
+    cart.Cart.loadFromStorage();
+    displayProduct.displayCart();
 }
 
 export default {

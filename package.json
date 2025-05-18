@@ -4,7 +4,12 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild modules/main.js --bundle --outfile=dist/index.js",
+    "build:min": "esbuild modules/main.js --bundle --minify --outfile=dist/index.min.js"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.25.4"
+  }
 }
