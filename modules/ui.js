@@ -82,4 +82,6 @@ let displayCart = () => {
 
 export default {
     buildProductsList: buildProductsList,
+    displayCart: displayCart,
+    displayProduct:displayProduct,
 };
